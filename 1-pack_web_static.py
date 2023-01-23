@@ -6,6 +6,7 @@ from datetime import datetime
 from fabric.api import local
 import os
 
+
 def do_pack():
     """generates a tgz archive"""
     try:
@@ -16,5 +17,5 @@ def do_pack():
         file_path = 'versions/web_static_{}.tgz'.format(time.strftime(fmt))
         local('tar - cvzf {} web_static'.format(file_path))
         return file_path
-    except:
+    except ValueError:
         return None
