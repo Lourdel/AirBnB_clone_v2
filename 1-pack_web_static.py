@@ -15,7 +15,7 @@ def do_pack():
         time = datetime.now()
         fmt = "%Y%m%d%H%M%S"
         file_path = 'versions/web_static_{}.tgz'.format(time.strftime(fmt))
-        local('tar - cvzf {} web_static'.format(file_path))
+        local('tar -cvzf {} web_static'.format(file_path))
         return file_path
     except ValueError:
         return None
