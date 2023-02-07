@@ -1,23 +1,24 @@
 #!/usr/bin/python3
-"""
-script that starts a Flask web application and lists states
-"""
+
+"""starts a Flask web application"""
+
 from flask import Flask, render_template
-from models import storage
+from models import *
 from models.state import State
+from models import storage
 
 app = Flask(__name__)
 
 
 @app.route("/states_list", strict_slashes=False)
-def display_html():
-    """Display states and cities in a sorted order"""
+def states_list():
+    """display the states and cities listed in alphabetical order"""
     states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    return render_template('7-states_list.html', states)
+    return render_template('7-states_list.html', states=states)
 
 
-@app.teardown_appcontent
-def teardown(exception):
+@app.teardown_appcontext
+def teardown_con(exception):
     """remove the current SQLAlchemy Session"""
     storage.close()
 
